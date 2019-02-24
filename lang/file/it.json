@@ -1,0 +1,16 @@
+{
+  "$quartz": {
+    "data": {
+      "file": {
+        "name": "File",
+        "description": "File",
+        "attributes": {
+          "name": {
+            "label": "name",
+            "description": "Identify the record by a human-readable string"
+          }
+        }
+      }
+    }
+  }  
+}
