@@ -10,6 +10,8 @@ export default new Manager({
     new Attributes.Id(),
     new Attributes.Base('name'),
     new Attributes.File('file', new FileApi()),
+    new Attributes.Base('model_type'),
+    new Attributes.Base('model_id'),
     new Attributes.DateTime('created_at'),
     new Attributes.DateTime('updated_at')
   ]
