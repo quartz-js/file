@@ -54,7 +54,11 @@ export default {
         return resource.url
       }
 
-      return require('../../../assets/extension/' + extension + '.svg')
+      try {
+        return require('../../../assets/extension/' + extension + '.svg')
+      } catch (e) {
+        return require('../../../assets/extension/txt.svg')
+      }
     }
   }
 }
