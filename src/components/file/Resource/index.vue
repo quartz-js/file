@@ -48,14 +48,17 @@ export default {
     },
     getPreview(resource) {
       var filename = resource.url;
-      var extension = filename.split('.').pop();
-
+      var extension = filename.split(/\#|\?/)[0].split('.').pop().trim();
 
       if (_.includes(['jpeg', 'jpg', 'png', 'gif'], extension)) {
         return resource.url
       }
 
-      return require('../../../assets/extension/' + extension + '.svg')
+      try {
+        return require('../../../assets/extension/' + extension + '.svg')
+      } catch (e) {
+        return require('../../../assets/extension/txt.svg')
+      }
     }
   }
 }
