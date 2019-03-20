@@ -18,6 +18,6 @@ export class FileApi extends ResourceApi {
       },
       headers: { 
         Authorization: 'Bearer ' + this.access_token 
-    }}).then(this.parse)
+    }}).then((response) => { return this.parse(response) });
   }
 };
