@@ -1,16 +1,16 @@
 <template>
   <q-resource-index v-bind="$attrs" :settings-enabled="false">
     <template slot='top' slot-scope="scope">
-      <create v-bind="$attrs"/>
+      <slot name="top" v-bind="scope"/>
     </template>
     <template slot='actions' slot-scope="scope">
-      <edit :resource="scope.resource" v-bind="$attrs"/>
+      <slot name="actions" v-bind="scope"/>
     </template>
     <template slot='row' slot-scope="scope">
-      <td class="main-col pa-2">
+      <td class="main-col pa-2" style='width: 100%'>
         <v-layout align-center>
-          <div style='width: 70px' class="text-xs-center">
-            <a :href="scope.resource.url" target='_blank'  v-if="scope.resource.media"><img :src="getPreview(scope.resource)"></a>
+          <div style='width: 70px; height: 70px' class="text-xs-center">
+            <a :href="scope.resource.url" target='_blank' style='display:block' v-if="scope.resource.media"><img :src="getPreview(scope.resource)"></a>
             <v-chip color="error" v-if="!scope.resource.media" small style='color: white' disabled>No file</v-chip>
           </div>
           <div class="pa-1 pl-3">
@@ -30,15 +30,9 @@
 
 <script>
 
-import Create from './create'
-import Edit from './edit'
 import _ from 'lodash'
 
 export default {
-  components: {
-    Create,
-    Edit
-  },
   methods: {
     formatBytes(bytes) {
       if(bytes < 1024) return bytes + " Bytes";
@@ -55,9 +49,9 @@ export default {
       }
 
       try {
-        return require('../../../assets/extension/' + extension + '.svg')
+        return require('../assets/extension/' + extension + '.svg')
       } catch (e) {
-        return require('../../../assets/extension/txt.svg')
+        return require('../assets/extension/txt.svg')
       }
     }
   }
@@ -68,9 +62,6 @@ export default {
   img {
     width: 70px;
     height: 70px;
-  }
-  .main-col {
-    width: 100%;
   }
   p {
     margin-bottom: 2px;

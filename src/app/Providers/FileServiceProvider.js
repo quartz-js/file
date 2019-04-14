@@ -1,21 +1,41 @@
 import { ServiceProvider } from '@railken/quartz-core'
-import { container } from '@railken/quartz-core'
+import { container, Attributes, Interceptor } from '@railken/quartz-core'
+import { FileApi } from '../Api/FileApi'
+import _ from 'lodash'
 
 export class FileServiceProvider extends ServiceProvider {
   register() {
 
-    this.addRoutes('app', require('./../../routes/file.js'))
+    this.registerComponent("FileResourceIndex", require('../../components/ResourceIndex').default)
 
-    this.addData({
-      name: 'file',
-      icon: require('../../assets/file-icon.svg'),
-      tags: ['data'],
-      route: { name: 'files.index' },
+    Interceptor.add('managerOnCreate', data => {
+
+      _.map(data.manager.descriptor, (descriptor, key) => {
+        if (descriptor.type === 'file') {
+
+          let attribute = new Attributes.File(key, new FileApi())
+            .set('fillable', true)
+            .set('style', {
+              extends: 'data-view-attribute-input'
+            })
+
+          data.manager.addAttribute(attribute)
+        }
+      })
+
+      return data
     })
 
-    this.addLang({
-      'en': require('../../../lang/file/en.json'),
-      'it': require('../../../lang/file/it.json')
+    Interceptor.add('resourceIndexOnRetrieve', data => {
+
+      _.map(data.manager.descriptor, (descriptor, key) => {
+        if (descriptor.type === 'file') {
+          data.component = 'FileResourceIndex'
+        }
+      })
+
+      return data
     })
   }
+
 }
