@@ -12,7 +12,7 @@ export class FileApi extends ResourceApi {
    * @return {Promise}
    */
   upload (id, params, progress) {
-    return this.post(this.getFullUrl() + "/" + id + "/upload", params, { 
+    return this.post("/" + id + "/upload", params, { 
       progress(e) {
         progress(e);
       },
