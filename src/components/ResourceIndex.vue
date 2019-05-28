@@ -9,16 +9,23 @@
     <template slot='row' slot-scope="scope">
       <td class="main-col pa-2" style='width: 100%'>
         <v-layout align-center>
-          <div style='width: 70px; height: 70px' class="text-xs-center">
+          <div style='width: 80px; height: 80px' class="text-xs-center">
             <a :href="scope.resource.url" target='_blank' style='display:block' v-if="scope.resource.media"><img :src="getPreview(scope.resource)"></a>
             <v-chip color="error" v-if="!scope.resource.media" small style='color: white' disabled>No file</v-chip>
           </div>
           <div class="pa-1 pl-3">
             <p>#{{ scope.config.getAttribute('id').extractReadableValue(scope.resource) }} - {{ scope.config.getAttribute('name').extractReadableValue(scope.resource) }}</p>
-            <p>{{ scope.config.getAttribute('created_at').extractReadableValue(scope.resource) }}</p>
             <p v-if="scope.resource.media">
               {{ scope.resource.media.mime_type }}
               {{ formatBytes(scope.resource.media.size) }}
+            </p>
+            <p>{{ scope.config.getAttribute('created_at').extractReadableValue(scope.resource) }}</p>
+            <p>
+              
+              <a :href='scope.resource.url' target='_blank'>{{ scope.config.getAttribute('name').extractReadableValue(scope.resource) }}</a>
+              <span v-for="conversion in scope.resource.conversions">
+                 | <a :href='conversion.url' target='_blank'>{{ conversion.name }}</a>
+              </span>
             </p>
           </div>
         </v-layout>
@@ -60,8 +67,8 @@ export default {
 
 <style scoped>
   img {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
   }
   p {
     margin-bottom: 2px;
