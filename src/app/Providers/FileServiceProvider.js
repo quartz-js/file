@@ -1,5 +1,5 @@
-import { ServiceProvider } from '@railken/quartz-core'
-import { container, Attributes, Interceptor } from '@railken/quartz-core'
+import { ServiceProvider } from '@quartz/core'
+import { container, Attributes, Interceptor } from '@quartz/core'
 import { FileApi } from '../Api/FileApi'
 import _ from 'lodash'
 
