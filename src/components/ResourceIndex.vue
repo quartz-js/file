@@ -9,7 +9,7 @@
     <template slot='row' slot-scope="scope">
       <td class="main-col pa-2" style='width: 100%'>
         <v-layout align-center>
-          <div style='width: 80px; height: 80px' class="text-xs-center">
+          <div style='width: 80px; height: 80px' class="text-center">
             <a :href="scope.resource.url" target='_blank' style='display:block' v-if="scope.resource.media"><img :src="getPreview(scope.resource)"></a>
             <v-chip color="error" v-if="!scope.resource.media" small style='color: white' disabled>No file</v-chip>
           </div>
