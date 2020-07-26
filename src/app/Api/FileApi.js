@@ -1,7 +1,7 @@
 import { ResourceApi } from '@quartz/core'
 
 export class FileApi extends ResourceApi {
-  resource_url = '/admin/files';
+  resource_url = '/data/file';
 
   /**
    * Create
